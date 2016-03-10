@@ -11,7 +11,19 @@
  * result in true.
  */
 function validateGameType(gameTypeString) {
-
+	// if argument isn't a string, return false
+	if(typeof gameTypeString != 'string') {
+		return false;
+	// if input is a string and is either '1,' or any combo of upper/lower 'o-n-e', return 1 	
+	} else if(gameTypeString === '1' || gameTypeString.toLowerCase() === 'one') {
+		return 1;
+	// if input is a string and is either '2,' or any combo of upper/lower 't-w-o', return 2
+	} else if(gameTypeString === '2' || gameTypeString.toLowerCase() === 'two') {
+		return 2;
+	// if input is an invalid string, return false
+	} else {
+		return false;
+	}
 }
 
 /*
@@ -20,6 +32,22 @@ function validateGameType(gameTypeString) {
  * false if the name is not valid.
  */
 function validateName(name) {
+	// creates string including all acceptible characters
+	var validChars = ' -abcdefghijklmnopqrstuvwxyz';
+		//
+	 	if(typeof name === 'string' && name.length > 0) {
+
+	 		name = name.toLowerCase();
+	 	 	
+	 	 	for(var i = 0; i < name.length; i++) {
+	 	 		if(validChars.includes(name[i]) === false) {
+	 	 			return false;
+	 	 		} else {
+	 	 			return name;
+	 	 		}
+	 	 	}	
+	 	}
+	 	 return false;
 
 }
 
@@ -27,6 +55,20 @@ function validateName(name) {
  * Randomly generates and returns a name for a computer player.
  */
 function generateComputerName() {
+	// creates empty string to contain future name.
+	computerName = '';
+	// list of valid characters. Includes numbers and special characters because I'm a jerk.
+	possibleChars = 'abcdefghijklmnopqrstuvwxyz!@#$%^&*?~1234567890';
+
+	//do this six times
+	for(var i = 0; i < 6; i++) {
+		//create a random number between 0 and length of valid character set
+		rand = Math.floor(Math.random() * possibleChars.length);
+		//add the letter at the index of the random number to our computer name.
+		computerName = computerName + possibleChars[rand];
+	}
+	//return computername, which probably a silly name. 
+	return computerName;
 
 }
 
@@ -38,7 +80,20 @@ function generateComputerName() {
  * insensitive, so it should accept both 'Y' and 'y' for example.
  */
 function validateYesNo(yesNoString) {
-
+	// is it a string and does it have at least one letter?
+	if(typeof yesNoString === 'string' && yesNoString.length > 0) {
+		// first make it lowercase
+		yesNoString = yesNoString.toLowerCase();
+		// if it is 'y' or 'yes,' return true
+		if(yesNoString === 'y' || yesNoString === 'yes') {
+			return true;
+		// if it's 'n' or 'no' return false
+		} else  if(yesNoString === 'n' || yesNoString === 'no') {
+			return false;
+		}
+	} 
+	// return null for everything else.
+	return null;
 }
 
 /*
@@ -47,7 +102,15 @@ function validateYesNo(yesNoString) {
  * 'O' and vice versa.
  */
 function getNextPlayer(currentPlayer) {
-
+	// if the currently player is 'X,' return 'O'
+	if(currentPlayer === 'X') {
+		return 'O';
+	//if the current player is 'O,' return 'X'	
+	} else if(currentPlayer === 'O') {
+		return 'X';
+	}
+	// otherwise, return false so we don't get empty function calls and invalid chars.
+	return false;
 }
 
 /*
