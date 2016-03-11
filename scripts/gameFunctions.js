@@ -131,9 +131,36 @@ function getNextPlayer(currentPlayer) {
  * 3 |   |   |   |
  *   ~~~~~~~~~~~~~
  */
-function getGameBoardString(gameBoard) {
 
-}
+function  getGameBoardString(gameBoard) {
+	// create a string to remember what my board looks like currently
+	// set that string to the first two rows
+		var gs = '\
+     1   2   3 \n\
+  ~~~~~~~~~~~~~';
+	// iterate over each row
+	for(var i=0; i<gameBoard.length; i++) {
+		// add that row to the string
+		gs = gs + '\n';
+		// add the row number to the string, add | to the string
+		gs = gs + (i+1) + ' |';
+		// iterate over the row
+		for(var x=0; x<gameBoard[i].length; x++) {
+			// add the cell to the string
+			gs = gs + ' ' + gameBoard[i][x] + ' |';
+
+		}
+				
+				
+		// add the ~~~~ to the string
+		gs = gs + '\n  ~~~~~~~~~~~~~';
+
+	}
+	gs = gs + '\n';
+	// return the string	
+	return gs;
+}	
+
 
 /*
  * Return the number of empty spaces that currently exist within the gameBoard
